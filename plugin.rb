@@ -1,7 +1,8 @@
 # name: discourse-admin-only
-# about: Add “Admin Only” checkbox on topics and expose it to Algolia
-# version: 0.1
-# authors: Your Name
+# about: A super simple plugin to demonstrate how plugins work
+# version: 0.0.1
+# authors: Awesome Plugin Developer
+# url: https://github.com/pushpinder6805/discourse-admin-only.git
 
 enabled_site_setting :admin_only_enabled
 
