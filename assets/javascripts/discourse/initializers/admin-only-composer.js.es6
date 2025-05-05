@@ -10,12 +10,10 @@ export default {
 
         didInsertElement() {
           this._super(...arguments);
-          // only for admins
-          if (!this.currentUser.admin) { return; }
+          if (!this.currentUser.admin) return;
 
           const model = this.model;
           model.customFields = model.customFields || {};
-          // default false
           if (model.customFields.admin_only === undefined) {
             model.customFields.admin_only = false;
           }

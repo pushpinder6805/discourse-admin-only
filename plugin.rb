@@ -1,11 +1,12 @@
 # name: discourse-admin-only
-# about: Add “Admin Only” flag to topics and expose it to Algolia
+# about: Add “Admin Only” checkbox on topics and expose it to Algolia
 # version: 0.1
-# authors: Pushpender Singh
+# authors: Your Name
+
 enabled_site_setting :admin_only_enabled
 
 after_initialize do
-  # 1. Save the custom field on create/edit
+  # Hook into topic create/edit
   on(:topic_created) do |topic, params, user|
     next unless user.admin?
     if params.dig(:topic, :custom_fields, :admin_only).present?
@@ -22,9 +23,6 @@ after_initialize do
     end
   end
 
-  # 2. Expose the field in your Algolia indexer
-  register_post_event_trigger(:topic_created, :post_created)
-
-  # Extend the TopicIndexer’s to_object
+  # Load our patch that adds the flag into the Algo­lia indexer
   require_dependency File.expand_path("../lib/admin_only/patch_topic_indexer.rb", __FILE__)
 end
